@@ -53,7 +53,6 @@
 </head>
 <body class="text-white antialiased">
 
-  <!-- NAV -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -71,7 +70,6 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="pt-24 pb-6 px-4">
     <div class="max-w-3xl mx-auto text-center">
       <p class="text-gold-500 text-xs tracking-[0.35em] uppercase mb-3">Anytime • Anywhere • 5-Star Service</p>
@@ -82,7 +80,6 @@
     </div>
   </section>
 
-  <!-- LIVE FARE CALCULATOR -->
   <section class="px-4 pb-10">
     <div class="max-w-lg mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
       <h2 class="text-lg font-bold mb-5 text-center">Live Fare Estimate</h2>
@@ -137,9 +134,7 @@
           <input type="checkbox" id="veteran" class="accent-gold-500 w-4 h-4 mt-1">
           <div>
             <div class="font-semibold text-sm text-gold-500">Veteran with ID Card</div>
-            <div class="text-[11px] text-gray-400 mt-0.5">
-              15% off for Veteran + 1 spouse or child only.
-            </div>
+            <div class="text-[11px] text-gray-400 mt-0.5">15% off for Veteran + 1 spouse or child only.</div>
           </div>
         </label>
         <div id="spouseChild" class="mt-3 ml-7 hidden">
@@ -176,9 +171,11 @@
           All rides paid upfront • Verified riders only
         </div>
 
-        <a href="sms:4194555181" id="bookLink" class="w-full btn-gold text-black font-bold py-3 rounded-lg text-center block text-sm">
-          Text to Confirm & Pay
+        <div id="paypal-button-container" class="mb-3"></div>
+        <a href="sms:4194555181" id="bookLink" class="w-full border border-gold-500 text-gold-500 font-bold py-3 rounded-lg text-center block text-sm">
+          Or Text to Confirm
         </a>
+        <p id="payStatus" class="text-center text-xs text-green-400 mt-2 hidden"></p>
       </div>
     </div>
   </section>
@@ -191,7 +188,6 @@
           <li>All riders must be approved on the platform</li>
           <li>You invite them → they sign up with proper ID</li>
           <li>Once verified, rides can be sent to them</li>
-          <li>You can pay under your name or anonymously</li>
         </ul>
       </div>
       <div class="text-center pt-4">
@@ -219,11 +215,55 @@
   </footer>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvQXEeswndpPE9Ensbs1FeRJL&libraries=places"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=BAAC90PTc6nZG-_jpBG80V9ZtMHcaWM-xG65RR_ZZiKoLA4Jx0xjvaRxJ1sXzi8-cpEDJzwUoBSuMZ9HHA&currency=USD"></script>
   <script>
     const RATES = {
       standard: { base: 2.75, perMile: 1.45, perMinute: 0.28, booking: 2.50, minimum: 8.00 },
       xl:       { base: 4.50, perMile: 2.15, perMinute: 0.40, booking: 3.00, minimum: 12.00 }
     };
+
+    let currentFare = 0;
+
+    function renderPayPalButton(amount) {
+      currentFare = amount;
+      const container = document.getElementById('paypal-button-container');
+      container.innerHTML = '';
+      
+      if (typeof paypal === 'undefined') {
+        container.innerHTML = '<p class="text-red-400 text-xs text-center">PayPal loading...</p>';
+        return;
+      }
+
+      paypal.Buttons({
+        style: {
+          layout: 'vertical',
+          color:  'gold',
+          shape:  'rect',
+          label:  'pay'
+        },
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              description: 'A2B Rides - Upfront Fare',
+              amount: {
+                value: amount.toFixed(2)
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            document.getElementById('payStatus').textContent = 'Payment received! Ride confirmed.';
+            document.getElementById('payStatus').classList.remove('hidden');
+          });
+        },
+        onError: function(err) {
+          console.error(err);
+          document.getElementById('payStatus').textContent = 'Payment error. Please try again or text us.';
+          document.getElementById('payStatus').classList.remove('hidden');
+        }
+      }).render('#paypal-button-container');
+    }
 
     function init() {
       const opts = { componentRestrictions: { country: 'us' }, fields: ['geometry', 'formatted_address'] };
@@ -346,6 +386,7 @@
           );
           document.getElementById('bookLink').href = `sms:4194555181&body=${sms}`;
           document.getElementById('result').classList.remove('hidden');
+          renderPayPalButton(fare);
         });
       });
     }
