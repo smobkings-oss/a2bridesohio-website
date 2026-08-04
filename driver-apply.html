@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drive With A2B Rides Ohio | Driver Application</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { gold: { 400: '#f5d76e', 500: '#d4af37', 600: '#b8860b' } }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #050505; }
+    .gold-text {
+      background: linear-gradient(135deg, #f5d76e, #d4af37, #b8860b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn-gold { background: linear-gradient(135deg, #d4af37, #b8860b); }
+    .btn-gold:hover { background: linear-gradient(135deg, #f5d76e, #d4af37); }
+  </style>
+</head>
+<body class="text-white antialiased">
+
+  <nav class="border-b border-white/10 bg-black/95">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="font-bold text-gold-500">A2B RIDES</div>
+        <div class="text-[10px] text-gray-400">OHIO</div>
+      </a>
+      <a href="index.html" class="text-sm text-gray-400">← Back to Home</a>
+    </div>
+  </nav>
+
+  <div class="max-w-2xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-black mb-2">Driver Application</h1>
+    <p class="text-gray-400 mb-8 text-sm">Better pay. Real respect. Local ownership.</p>
+
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 mb-6 text-sm">
+      <h2 class="font-bold text-gold-500 mb-3">Eligibility Requirements</h2>
+      <ul class="text-xs text-gray-400 space-y-2 list-disc list-inside">
+        <li>Must have lived in the <strong class="text-white">USA for 10+ years</strong>.</li>
+        <li><strong class="text-white">Any traffic tickets in the last 5 years</strong> → cannot drive.</li>
+        <li>If under 21 and license held less than 4 years → cannot drive until age 21 and 2+ years active license.</li>
+        <li>Must carry your own passenger / rideshare insurance.</li>
+      </ul>
+    </div>
+
+    <div class="bg-zinc-900 border border-amber-800/40 rounded-2xl p-5 mb-8 text-sm">
+      <h2 class="font-bold text-amber-400 mb-3">Insurance Policy</h2>
+      <ul class="text-xs text-gray-400 space-y-2 list-disc list-inside">
+        <li>You must carry your own passenger / rideshare insurance.</li>
+        <li>A2B Rides is <strong class="text-white">not responsible</strong> for anything between pickups or after drop-offs.</li>
+        <li>We cover passenger insurance on your vehicle after <strong class="text-white">159 rides</strong>.</li>
+        <li>Until 159 rides → you must carry Rideshare insurance.</li>
+        <li>5-star drivers receive random weekly bonuses to help with insurance cost.</li>
+      </ul>
+    </div>
+
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data" class="space-y-6">
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-4">
+        <h3 class="font-bold text-gold-500">Personal Information</h3>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Full Legal Name *</label>
+          <input type="text" name="full_name" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Phone *</label>
+            <input type="tel" name="phone" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Email *</label>
+            <input type="email" name="email" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Date of Birth *</label>
+          <input type="date" name="dob" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Years lived in the USA *</label>
+          <input type="number" name="years_in_usa" min="0" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Years with active driver's license *</label>
+          <input type="number" name="license_years" min="0" step="0.5" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Any traffic tickets in the last 5 years? *</label>
+          <select name="tickets_5yrs" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+            <option value="">Select...</option>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-4">
+        <h3 class="font-bold text-gold-500">Government ID (Front & Back – No Blur)</h3>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">ID Front *</label>
+          <input type="file" name="id_front" accept="image/*" required class="w-full text-sm text-gray-400">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">ID Back *</label>
+          <input type="file" name="id_back" accept="image/*" required class="w-full text-sm text-gray-400">
+        </div>
+      </div>
+
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-4">
+        <h3 class="font-bold text-gold-500">Vehicle Information & Photos</h3>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Vehicle Year / Make / Model *</label>
+          <input type="text" name="vehicle" placeholder="e.g. 2023 Tesla Model 3" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">License Plate Number *</label>
+          <input type="text" name="plate" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">VIN *</label>
+          <input type="text" name="vin" required class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Vehicle Front *</label>
+            <input type="file" name="veh_front" accept="image/*" required class="w-full text-sm text-gray-400">
+          </div>
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Vehicle Back *</label>
+            <input type="file" name="veh_back" accept="image/*" required class="w-full text-sm text-gray-400">
+          </div>
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Driver Side *</label>
+            <input type="file" name="veh_side_l" accept="image/*" required class="w-full text-sm text-gray-400">
+          </div>
+          <div>
+            <label class="block text-xs text-gray-400 mb-1">Passenger Side *</label>
+            <input type="file" name="veh_side_r" accept="image/*" required class="w-full text-sm text-gray-400">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">VIN Sticker on Door *</label>
+          <input type="file" name="vin_photo" accept="image/*" required class="w-full text-sm text-gray-400">
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Registration *</label>
+          <input type="file" name="registration" accept="image/*,.pdf" required class="w-full text-sm text-gray-400">
+        </div>
+      </div>
+
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 space-y-4">
+        <h3 class="font-bold text-gold-500">Insurance</h3>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1">Insurance Card / Declaration *</label>
+          <input type="file" name="insurance" accept="image/*,.pdf" required class="w-full text-sm text-gray-400">
+        </div>
+      </div>
+
+      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+        <label class="flex items-start gap-3 cursor-pointer text-sm">
+          <input type="checkbox" name="agree" required class="accent-gold-500 w-4 h-4 mt-1">
+          <span class="text-gray-300">I confirm all information is accurate. I understand the insurance and eligibility rules.</span>
+        </label>
+      </div>
+
+      <button type="submit" class="w-full btn-gold text-black font-bold py-4 rounded-xl text-lg">
+        Submit Driver Application
+      </button>
+    </form>
+  </div>
+</body>
+</html>
