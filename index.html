@@ -19,6 +19,7 @@
     .btn-gold{background:linear-gradient(135deg,#d4af37,#b8860b)}
     .btn-gold:hover{background:linear-gradient(135deg,#f5d76e,#d4af37)}
     .holographic-border{border:1px solid transparent;background:linear-gradient(#0a0a0a,#0a0a0a) padding-box,linear-gradient(135deg,#ff00cc,#3333ff,#00ffcc,#ffcc00) border-box}
+    .pac-container{z-index:10000!important}
   </style>
 </head>
 <body class="text-white antialiased">
@@ -58,13 +59,13 @@
 
       <div class="mb-4">
         <label class="block text-xs text-gold-500 uppercase tracking-wider mb-1.5">Customer Pickup</label>
-        <input id="pickup" type="text" placeholder="Full pickup address (street, city)" 
+        <input id="pickup" type="text" placeholder="Start typing address..." 
                class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
       </div>
 
       <div class="mb-4">
         <label class="block text-xs text-gold-500 uppercase tracking-wider mb-1.5">Drop-off Location</label>
-        <input id="dropoff" type="text" placeholder="Full drop-off address (street, city)" 
+        <input id="dropoff" type="text" placeholder="Start typing address..." 
                class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
       </div>
 
@@ -164,7 +165,7 @@
     <p class="text-xs text-gray-600">© 2026 A2B Rides Ohio • Anytime Anywhere Solutions LLC</p>
   </footer>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvQXEeswndpPE9Ensbs1FeRJL&libraries=places"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmJloMx3T2JW7nt-HCcWrP6Xhl3Q4vDAs&libraries=places"></script>
   <script src="https://www.paypal.com/sdk/js?client-id=BAAC90PTc6nZG-_jpBG80V9ZtMHcaWM-xG65RR_ZZiKoLA4Jx0xjvaRxJ1sXzi8-cpEDJzwUoBSuMZ9HHA&currency=USD"></script>
   <script>
     const RATES = {
@@ -203,7 +204,14 @@
     }
 
     function init() {
-      console.log('A2B Rides fare calculator ready');
+      try {
+        const opts = { componentRestrictions: { country: 'us' }, fields: ['geometry', 'formatted_address'] };
+        if (document.getElementById('driverLoc')) new google.maps.places.Autocomplete(document.getElementById('driverLoc'), opts);
+        if (document.getElementById('pickup')) new google.maps.places.Autocomplete(document.getElementById('pickup'), opts);
+        if (document.getElementById('dropoff')) new google.maps.places.Autocomplete(document.getElementById('dropoff'), opts);
+      } catch (e) {
+        console.warn('Places Autocomplete init error', e);
+      }
     }
 
     document.getElementById('veteran').addEventListener('change', function() {
@@ -241,6 +249,11 @@
         return;
       }
 
+      if (typeof google === 'undefined' || !google.maps) {
+        alert('Maps is still loading. Please wait a second and try again.');
+        return;
+      }
+
       const service = new google.maps.DistanceMatrixService();
 
       service.getDistanceMatrix({
@@ -250,7 +263,7 @@
         unitSystem: google.maps.UnitSystem.IMPERIAL
       }, (res1, status1) => {
         if (status1 !== 'OK' || !res1.rows[0] || !res1.rows[0].elements[0] || res1.rows[0].elements[0].status !== 'OK') {
-          alert('Could not calculate driver-to-pickup distance. Try full street addresses.');
+          alert('Could not calculate driver-to-pickup distance. Use full street addresses.');
           return;
         }
 
@@ -264,7 +277,7 @@
           unitSystem: google.maps.UnitSystem.IMPERIAL
         }, (res2, status2) => {
           if (status2 !== 'OK' || !res2.rows[0] || !res2.rows[0].elements[0] || res2.rows[0].elements[0].status !== 'OK') {
-            alert('Could not calculate pickup-to-dropoff distance. Try full street addresses.');
+            alert('Could not calculate pickup-to-dropoff distance. Use full street addresses.');
             return;
           }
 
