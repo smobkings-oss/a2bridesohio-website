@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A2B Rides Ohio | Anytime • Anywhere • 5-Star Service</title>
+  <meta name="description" content="A2B Rides Ohio – Live pricing. Veterans 15% off. Verified riders. Strict safety policies. All rides paid upfront." />
+  
+  <meta property="og:title" content="A2B Rides Ohio" />
+  <meta property="og:description" content="Anytime • Anywhere • 5-Star Service. Premium rides across NW Ohio & Michigan." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://a2bridesohio.com" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 400: '#f5d76e', 500: '#d4af37', 600: '#b8860b' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #050505; }
+    .gold-text {
+      background: linear-gradient(135deg, #f5d76e, #d4af37, #b8860b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #f5d76e, #d4af37);
+    }
+    .holographic-border {
+      border: 1px solid transparent;
+      background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+                  linear-gradient(135deg, #ff00cc, #3333ff, #00ffcc, #ffcc00) border-box;
+    }
+    .pac-container { z-index: 10000 !important; }
+  </style>
+</head>
+<body class="text-white antialiased">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full holographic-border flex items-center justify-center bg-black">
+          <span class="font-black text-sm tracking-tighter gold-text">A2B</span>
+        </div>
+        <div>
+          <div class="font-bold tracking-wide text-lg leading-none">A2B RIDES</div>
+          <div class="text-[10px] text-gold-500 tracking-[0.2em]">OHIO</div>
+        </div>
+      </div>
+      <a href="sms:4194555181" class="btn-gold text-black font-bold text-sm px-5 py-2.5 rounded-lg">
+        Text for Pricing
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pt-24 pb-6 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-gold-500 text-xs tracking-[0.35em] uppercase mb-3">Anytime • Anywhere • 5-Star Service</p>
+      <h1 class="text-3xl sm:text-5xl font-black mb-3 leading-tight">
+        Premium Rides.<br><span class="gold-text">Driver First.</span>
+      </h1>
+      <p class="text-gray-400 text-sm">Verified riders only • Live pricing • Veterans 15% off</p>
+    </div>
+  </section>
+
+  <!-- LIVE FARE CALCULATOR -->
+  <section class="px-4 pb-10">
+    <div class="max-w-lg mx-auto bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+      <h2 class="text-lg font-bold mb-5 text-center">Live Fare Estimate</h2>
+
+      <div class="mb-4">
+        <label class="block text-xs text-gold-500 uppercase tracking-wider mb-1.5">Driver Current Location</label>
+        <input id="driverLoc" type="text" placeholder="Where are you right now?" 
+               class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+        <p class="text-[10px] text-gray-500 mt-1">Customer pays for you to travel to them.</p>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-xs text-gold-500 uppercase tracking-wider mb-1.5">Customer Pickup</label>
+        <input id="pickup" type="text" placeholder="Customer pickup address" 
+               class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-xs text-gold-500 uppercase tracking-wider mb-1.5">Drop-off Location</label>
+        <input id="dropoff" type="text" placeholder="Drop-off address" 
+               class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-xs text-gold-500 uppercase tracking-wider mb-1.5">Passengers</label>
+        <select id="passengers" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold-500">
+          <option value="1">1 Passenger</option>
+          <option value="2">2 Passengers</option>
+          <option value="3">3 Passengers</option>
+          <option value="4">4 Passengers</option>
+          <option value="5">5 Passengers</option>
+          <option value="6">6 Passengers</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-xs text-gold-500 uppercase tracking-wider mb-2">Luggage</label>
+        <div class="flex flex-wrap gap-4 text-sm">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="luggage2" class="accent-gold-500 w-4 h-4">
+            <span>2 Suitcases</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="carryon" class="accent-gold-500 w-4 h-4">
+            <span>Carry-on</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- VETERAN -->
+      <div class="mb-5 p-3 bg-zinc-800/50 border border-zinc-700 rounded-xl">
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="checkbox" id="veteran" class="accent-gold-500 w-4 h-4 mt-1">
+          <div>
+            <div class="font-semibold text-sm text-gold-500">Veteran with ID Card</div>
+            <div class="text-[11px] text-gray-400 mt-0.5">
+              15% off for Veteran + 1 spouse or child only.
+            </div>
+          </div>
+        </label>
+        <div id="spouseChild" class="mt-3 ml-7 hidden">
+          <label class="flex items-center gap-2 text-sm cursor-pointer">
+            <input type="checkbox" id="plusOne" class="accent-gold-500 w-4 h-4">
+            <span>+ 1 Spouse or Child traveling together</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="vehicleType" class="mb-4 text-center">
+        <span class="bg-zinc-800 px-3 py-1 rounded-full text-gold-500 font-semibold text-xs">Standard</span>
+      </div>
+
+      <button onclick="calculateFare()" class="w-full btn-gold text-black font-bold py-3.5 rounded-xl text-base mb-4">
+        Calculate Full Fare
+      </button>
+
+      <div id="result" class="hidden bg-black border border-gold-500/40 rounded-xl p-4">
+        <div class="text-center mb-3">
+          <div class="text-xs text-gray-400">Total Estimated Fare</div>
+          <div id="fareAmount" class="text-3xl font-black gold-text">$0.00</div>
+          <div id="discountLine" class="text-xs text-green-400 mt-1 hidden"></div>
+        </div>
+
+        <div class="text-xs text-gray-400 space-y-1 mb-4 border-t border-zinc-800 pt-3">
+          <div class="flex justify-between"><span>Driver → Pickup</span><span id="deadheadText">—</span></div>
+          <div class="flex justify-between"><span>Pickup → Drop-off</span><span id="rideText">—</span></div>
+          <div class="flex justify-between"><span>Total Distance</span><span id="totalDist">—</span></div>
+          <div class="flex justify-between"><span>Rate Type</span><span id="rateType">—</span></div>
+        </div>
+
+        <div class="text-center text-[11px] text-amber-400/90 mb-3 font-medium">
+          All rides paid upfront • Verified riders only
+        </div>
+
+        <a href="sms:4194555181" id="bookLink" class="w-full btn-gold text-black font-bold py-3 rounded-lg text-center block text-sm">
+          Text to Confirm & Pay
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALL POLICIES condensed for length -->
+  <section class="px-4 pb-10">
+    <div class="max-w-lg mx-auto space-y-4 text-sm">
+      <div class="bg-zinc-950 border border-gold-500/30 rounded-2xl p-5">
+        <h3 class="font-bold text-gold-500 mb-3">Verified Riders Only</h3>
+        <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside">
+          <li>All riders must be approved on the platform</li>
+          <li>You invite them → they sign up with proper ID</li>
+          <li>Once verified, rides can be sent to them</li>
+          <li>You can pay under your name or anonymously</li>
+        </ul>
+      </div>
+      <div class="bg-zinc-950 border border-zinc-800 rounded-2xl p-5">
+        <h3 class="font-bold text-gold-500 mb-3">Mask Policy</h3>
+        <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside">
+          <li><strong class="text-white">No ski masks</strong> allowed inside the vehicle</li>
+          <li>Only medical-grade paper masks or doctor-approved masks permitted</li>
+        </ul>
+      </div>
+      <div class="bg-zinc-950 border border-red-900/50 rounded-2xl p-5">
+        <h3 class="font-bold text-red-400 mb-3">Child Safety (Ohio & Michigan Law)</h3>
+        <ul class="text-xs text-gray-400 space-y-2 list-disc list-inside">
+          <li>Children requiring a booster (under age 8 or under 4'9") without one → half fare</li>
+          <li>Children not in proper car seats → No ride + half the fare lost</li>
+        </ul>
+      </div>
+      <div class="bg-zinc-950 border border-zinc-800 rounded-2xl p-5">
+        <h3 class="font-bold text-gold-500 mb-3">Payment & More</h3>
+        <ul class="text-xs text-gray-400 space-y-1.5 list-disc list-inside">
+          <li>All rides paid upfront</li>
+          <li>Veteran 15% off (Vet + 1 only)</li>
+          <li>Driver travel to pickup is charged</li>
+          <li>See full policies on site</li>
+        </ul>
+      </div>
+      <div class="text-center pt-4">
+        <a href="driver-apply.html" class="btn-gold text-black font-bold px-6 py-3 rounded-xl inline-block text-sm mr-2 mb-2">Drive With Us</a>
+        <a href="passenger-signup.html" class="border border-gold-500 text-gold-500 font-bold px-6 py-3 rounded-xl inline-block text-sm mb-2">Passenger Sign Up</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="py-10 px-4 bg-zinc-950 text-center">
+    <a href="sms:4194555181" class="text-2xl font-bold text-gold-500">419-455-5181</a>
+    <p class="text-xs text-gray-500 mt-2">Text for pricing • Call to schedule (24+ hrs)</p>
+    <p class="text-xs text-gray-500 mt-1">a2brides@a2bridesohio.com</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-zinc-900 py-8 px-4 text-center">
+    <div class="flex justify-center mb-3">
+      <div class="w-12 h-12 rounded-full holographic-border flex items-center justify-center bg-black">
+        <span class="font-black gold-text">A2B</span>
+      </div>
+    </div>
+    <div class="font-bold text-sm tracking-wide">A2B RIDES OHIO</div>
+    <div class="text-[10px] text-gray-500 tracking-widest mb-3">ANYTIME • ANYWHERE • 5-STAR SERVICE</div>
+    <p class="text-xs text-gray-600">© 2026 A2B Rides Ohio • Anytime Anywhere Solutions LLC</p>
+  </footer>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvQXEeswndpPE9Ensbs1FeRJL&libraries=places"></script>
+  <script>
+    const RATES = {
+      standard: { base: 2.75, perMile: 1.45, perMinute: 0.28, booking: 2.50, minimum: 8.00 },
+      xl:       { base: 4.50, perMile: 2.15, perMinute: 0.40, booking: 3.00, minimum: 12.00 }
+    };
+
+    function init() {
+      const opts = { componentRestrictions: { country: 'us' }, fields: ['geometry', 'formatted_address'] };
+      new google.maps.places.Autocomplete(document.getElementById('driverLoc'), opts);
+      new google.maps.places.Autocomplete(document.getElementById('pickup'), opts);
+      new google.maps.places.Autocomplete(document.getElementById('dropoff'), opts);
+    }
+
+    document.getElementById('veteran').addEventListener('change', function() {
+      document.getElementById('spouseChild').classList.toggle('hidden', !this.checked);
+      if (!this.checked) document.getElementById('plusOne').checked = false;
+    });
+
+    function getVehicleType() {
+      const pax = parseInt(document.getElementById('passengers').value);
+      const bags = document.getElementById('luggage2').checked;
+      const carry = document.getElementById('carryon').checked;
+      if (pax >= 5) return 'xl';
+      if (pax >= 2 && bags && carry) return 'xl';
+      return 'standard';
+    }
+
+    function updateBadge() {
+      const type = getVehicleType();
+      document.getElementById('vehicleType').innerHTML = type === 'xl'
+        ? '<span class="bg-gold-500 text-black px-3 py-1 rounded-full font-bold text-xs">XL</span>'
+        : '<span class="bg-zinc-800 px-3 py-1 rounded-full text-gold-500 font-semibold text-xs">Standard</span>';
+    }
+
+    document.getElementById('passengers').addEventListener('change', updateBadge);
+    document.getElementById('luggage2').addEventListener('change', updateBadge);
+    document.getElementById('carryon').addEventListener('change', updateBadge);
+
+    function calculateFare() {
+      const driver = document.getElementById('driverLoc').value.trim();
+      const pickup = document.getElementById('pickup').value.trim();
+      const dropoff = document.getElementById('dropoff').value.trim();
+
+      if (!driver || !pickup || !dropoff) {
+        alert('Please fill in Driver Location, Pickup, and Drop-off.');
+        return;
+      }
+
+      const service = new google.maps.DistanceMatrixService();
+
+      service.getDistanceMatrix({
+        origins: [driver],
+        destinations: [pickup],
+        travelMode: 'DRIVING',
+        unitSystem: google.maps.UnitSystem.IMPERIAL
+      }, (res1, status1) => {
+        if (status1 !== 'OK' || res1.rows[0].elements[0].status !== 'OK') {
+          alert('Could not calculate driver-to-pickup distance.');
+          return;
+        }
+
+        const deadheadMiles = res1.rows[0].elements[0].distance.value / 1609.34;
+        const deadheadMins  = res1.rows[0].elements[0].duration.value / 60;
+
+        service.getDistanceMatrix({
+          origins: [pickup],
+          destinations: [dropoff],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.IMPERIAL
+        }, (res2, status2) => {
+          if (status2 !== 'OK' || res2.rows[0].elements[0].status !== 'OK') {
+            alert('Could not calculate pickup-to-dropoff distance.');
+            return;
+          }
+
+          const rideMiles = res2.rows[0].elements[0].distance.value / 1609.34;
+          const rideMins  = res2.rows[0].elements[0].duration.value / 60;
+
+          const totalMiles = deadheadMiles + rideMiles;
+          const totalMins  = deadheadMins + rideMins;
+
+          const type = getVehicleType();
+          const r = RATES[type];
+
+          let fare = r.base + (totalMiles * r.perMile) + (totalMins * r.perMinute) + r.booking;
+          if (fare < r.minimum) fare = r.minimum;
+          fare = Math.ceil(fare * 4) / 4;
+
+          const isVeteran = document.getElementById('veteran').checked;
+          const pax = parseInt(document.getElementById('passengers').value);
+
+          let discountApplied = false;
+          let originalFare = fare;
+
+          if (isVeteran && pax <= 2) {
+            fare = fare * 0.85;
+            fare = Math.ceil(fare * 4) / 4;
+            discountApplied = true;
+          }
+
+          document.getElementById('fareAmount').textContent = '$' + fare.toFixed(2);
+          
+          const discountEl = document.getElementById('discountLine');
+          if (discountApplied) {
+            discountEl.textContent = 'Veteran 15% applied (was $' + originalFare.toFixed(2) + ')';
+            discountEl.classList.remove('hidden');
+            discountEl.classList.add('text-green-400');
+            discountEl.classList.remove('text-amber-400');
+          } else if (isVeteran && pax > 2) {
+            discountEl.textContent = 'Veteran discount not applied — more than Vet + 1';
+            discountEl.classList.remove('hidden');
+            discountEl.classList.remove('text-green-400');
+            discountEl.classList.add('text-amber-400');
+          } else {
+            discountEl.classList.add('hidden');
+          }
+
+          document.getElementById('deadheadText').textContent = deadheadMiles.toFixed(1) + ' mi / ' + Math.round(deadheadMins) + ' min';
+          document.getElementById('rideText').textContent = rideMiles.toFixed(1) + ' mi / ' + Math.round(rideMins) + ' min';
+          document.getElementById('totalDist').textContent = totalMiles.toFixed(1) + ' miles';
+          document.getElementById('rateType').textContent = type.toUpperCase() + (discountApplied ? ' • VET 15%' : '');
+
+          const sms = encodeURIComponent(
+            `A2B Ride Request\nDriver from: ${driver}\nPickup: ${pickup}\nDrop-off: ${dropoff}\nPax: ${pax}\nEst: $${fare.toFixed(2)}${discountApplied ? ' (Vet 15% off)' : ''}\nPAID UPFRONT`
+          );
+          document.getElementById('bookLink').href = `sms:4194555181&body=${sms}`;
+          document.getElementById('result').classList.remove('hidden');
+        });
+      });
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
